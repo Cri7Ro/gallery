@@ -38,7 +38,7 @@ export const ModalContent = styled.div`
 
     @media screen and (max-width: 480px) {
         width: 90vw;
-        height: 90vh;
+        height: 80vh;
     }
 `;
 

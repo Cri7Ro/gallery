@@ -13,18 +13,9 @@ const Modal: React.FC<IModal> = ({isOpen, setIsOpen, currentImg, setCurrentImg})
         setIsOpen(false);
     }
 
-    function preventScroll() {
-        window.scrollTo(0,0);
-    };
-
     useEffect(() => {
         document.addEventListener('click', handleCloseModal);
         return () => document.removeEventListener('click', handleCloseModal);
-    }, []);
-
-    useEffect(() => {
-        window.addEventListener('scroll', preventScroll);
-        return () =>  window.removeEventListener('scroll', preventScroll);
     }, []);
 
     function handleLikeClick() {
