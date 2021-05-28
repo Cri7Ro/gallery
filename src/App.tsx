@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Modal from './components/modal';
+import imageData from './imageData';
+import { ImageList } from './styles/imageListStyle';
+import Header from './components/header';
+
 
 function App() {
-  return (
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [currentImg, setCurrentImg] = useState<number | null>(null);
+
+  function handleImageClick(event: React.SyntheticEvent<HTMLImageElement>) {
+    if (!(event.target instanceof HTMLImageElement)) {
+      return;
+    }
+    setIsOpen(true);
+    let a: number = +event.target.dataset.index!;
+    setCurrentImg(a);
+  }
+
+  return ( 
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header /> 
+      <main>
+        <ImageList>
+          {imageData.map(image => <li key={image.id.toString()}><img src={image.src} alt='Фото' onClick={handleImageClick} data-index={image.id - 1}/></li>)}
+        </ImageList>
+        {isOpen ? <Modal isOpen={isOpen} setIsOpen={setIsOpen} currentImg={currentImg} setCurrentImg={setCurrentImg}/> : null}
+      </main>
     </div>
   );
 }
