@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ModalWindow, ModalContent, Like, Heart } from '../../styles/modalStyles';
+import { ModalWindow, ModalContent, Like, Close, Heart, CloseImg } from '../../styles/modalStyles';
 import { IModal } from '../../types/interfaces';
 import { Img } from '../../styles/imageListStyle';
 import imageData from '../../imageData';
@@ -13,9 +13,18 @@ const Modal: React.FC<IModal> = ({isOpen, setIsOpen, currentImg, setCurrentImg})
         setIsOpen(false);
     }
 
+    function preventScroll() {
+        window.scrollTo(0,0);
+    };
+
     useEffect(() => {
         document.addEventListener('click', handleCloseModal);
         return () => document.removeEventListener('click', handleCloseModal);
+    }, []);
+
+    useEffect(() => {
+        window.addEventListener('scroll', preventScroll);
+        return () =>  window.removeEventListener('scroll', preventScroll);
     }, []);
 
     function handleLikeClick() {
@@ -23,10 +32,15 @@ const Modal: React.FC<IModal> = ({isOpen, setIsOpen, currentImg, setCurrentImg})
         imageData[currentImg!].isLiked = !imageData[currentImg!].isLiked;
     }
 
+    function handleCloseClick() {
+        setIsOpen(false);
+    }
+
     return (
         <ModalWindow isOpen={isOpen} >
           <ModalContent onClick={event => event.stopPropagation()}>
             <Like onClick={handleLikeClick}><Heart isLiked={isLiked}></Heart></Like>
+            <Close onClick={handleCloseClick}><CloseImg src="./img/close.png" alt="" /></Close>
             <Img src={imageData[currentImg!].src} alt="" />
             <Messages currentImg={currentImg}/>
           </ModalContent>  

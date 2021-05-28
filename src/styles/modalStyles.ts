@@ -7,20 +7,20 @@ export const ModalWindow = styled.div<{isOpen: boolean}>`
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.9);
-    overflow: hidden;
+    
 `;
 
 export const ModalContent = styled.div`
     position: relative;
     top: 50%;
     left: 50%;
-    transform: translate(-52%, -50%);
+    transform: translate(-50%, -50%);
     width: 50vw;
     height: 50vw;
     background-color: white;
     display: flex;
     flex-direction: column;
-
+    
     @media screen and (max-width: 1080px) {
         width: 70vw;
         height: 70vw;
@@ -34,6 +34,11 @@ export const ModalContent = styled.div`
     @media screen and (max-width: 580px) {
         width: 90vw;
         height: 60vh;
+    }
+
+    @media screen and (max-width: 480px) {
+        width: 90vw;
+        height: 90vh;
     }
 `;
 
@@ -87,6 +92,25 @@ export const Like = styled.button`
         outline: none;
     }
     display: flex;
+`;
+
+export const Close = styled.button`
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: none;
+    border: none;
+    left: 5px;
+    &: focus {
+        outline: none;
+    }
+    display: flex;
+`;
+
+export const CloseImg = styled.img`
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
 `;
 
 export const Heart = styled.div<{isLiked: boolean}>`
