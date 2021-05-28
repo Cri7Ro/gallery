@@ -14,8 +14,9 @@ const Modal: React.FC<IModal> = ({isOpen, setIsOpen, currentImg, setCurrentImg})
     }
 
     useEffect(() => {
+        document.body.style.overflow = 'hidden';
         document.addEventListener('click', handleCloseModal);
-        return () => document.removeEventListener('click', handleCloseModal);
+        return () => {document.removeEventListener('click', handleCloseModal); document.body.style.overflow = 'scroll';}
     }, []);
 
     function handleLikeClick() {

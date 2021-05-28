@@ -2,25 +2,25 @@ import styled from 'styled-components';
 
 export const ModalWindow = styled.div<{isOpen: boolean}>`
     position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
+    top: 0;
+    left: 0;
     background-color: rgba(0, 0, 0, 0.9);
-    
+    overflow: scroll;
 `;
 
 export const ModalContent = styled.div`
     position: relative;
-    top: 50%;
+    top: 10%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     width: 50vw;
     height: 50vw;
     background-color: white;
     display: flex;
     flex-direction: column;
-    
+
     @media screen and (max-width: 1080px) {
         width: 70vw;
         height: 70vw;
